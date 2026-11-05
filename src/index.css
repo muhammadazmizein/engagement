@@ -437,7 +437,7 @@
 /* ============ Musik & sparkle ============ */
 .music-btn {
   @apply border-gold fixed z-[70] hidden h-[50px] w-[50px] cursor-pointer items-center justify-center gap-[3px] rounded-full border border-solid bg-[rgba(20,8,16,.75)] backdrop-blur-[8px];
-  right: max(14px, env(safe-area-inset-right));
+  left: max(14px, env(safe-area-inset-left));
   bottom: max(14px, env(safe-area-inset-bottom));
 }
 .music-btn.show { display: flex; animation: rise 1s both; }
