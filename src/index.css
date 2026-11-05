@@ -250,7 +250,7 @@
   mask: radial-gradient(circle, #000 0, transparent 42%);
   animation: spin2 90s linear infinite;
 }
-.rings { width: min(60vw, 200px); margin: 0 auto 6px; filter: drop-shadow(0 0 12px rgba(217, 180, 106, 0.7)); }
+.rings { overflow: visible; width: min(60vw, 200px); margin: 0 auto 6px; filter: drop-shadow(0 0 12px rgba(217, 180, 106, 0.7)); }
 .rings circle {
   fill: none; stroke: var(--color-gold2); stroke-width: 2.2;
   stroke-dasharray: 180; stroke-dashoffset: 180; transition: stroke-dashoffset 2.6s ease;
@@ -488,6 +488,35 @@
   .letter b { font-size: 1.5rem; }
   .section { min-height: auto; padding: 70px 20px; }
   .scroll-hint { display: none; }
+}
+
+
+/* ============ Mode hemat untuk HP / layar sentuh ============
+   Efek berikut paling mahal untuk GPU/CPU HP (blur besar, backdrop-filter,
+   properti yang dianimasikan lewat repaint). Tampilan tetap sama, hanya tanpa gerakan berat. */
+@media (max-width: 768px), (pointer: coarse) {
+  .grain, .rays, .aurora i { display: none; }
+  .aurora {
+    background:
+      radial-gradient(60vmax 60vmax at 10% 0%, rgba(138, 45, 91, 0.5), transparent 70%),
+      radial-gradient(50vmax 50vmax at 100% 40%, rgba(184, 134, 58, 0.28), transparent 70%),
+      radial-gradient(60vmax 60vmax at 30% 100%, rgba(91, 42, 138, 0.38), transparent 70%),
+      radial-gradient(120% 90% at 50% 0%, #2a0f23, var(--color-bg) 70%);
+  }
+  /* kaca buram (backdrop-filter) diganti latar sedikit lebih pekat */
+  .box, .card, .tl-card, .lb { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .card { background: linear-gradient(180deg, rgba(62, 26, 52, 0.72), rgba(42, 16, 34, 0.6)); }
+  .box, .tl-card { background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04)); }
+  .lb { background: rgba(10, 4, 8, 0.96); }
+  /* blur pada animasi muncul sangat berat -> cukup fade + geser */
+  .rv, .split .ch, .words .w { filter: none; }
+  /* border/gradien yang berputar menggambar ulang terus -> diam */
+  .photo::before, .photo::after, .card::before { animation: none; }
+  .tl-dot, .rings .gem, .box::before, .btn-open::before { animation: none; }
+  .tl-dot { box-shadow: 0 0 0 6px rgba(217, 180, 106, 0.2); }
+  /* mask pada elemen yang bergerak memaksa render ulang tiap frame */
+  .marq { -webkit-mask: none; mask: none; }
+  .t { transition: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {

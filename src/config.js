@@ -20,7 +20,7 @@ export const CONFIG = {
     ],
   },
   eventDate: "2027-01-30T07:00:00+07:00",
-  musicUrl: `${base}musik/river-flows-in-you.mp3`, // kalau file tidak ada, otomatis pakai melodi bawaan
+  musicUrl: `${base}musik/canon.m4a`, // kalau file tidak ada, otomatis pakai melodi bawaan
   place: "Kediaman Pihak Wanita",
   addressLines: ["Taman Raya Rajeg, Blok C6/30", "RT 003, RW 005 Rajeg, Kab. Tangerang"],
   mapsUrl:
@@ -41,7 +41,7 @@ export const CONFIG = {
   // "Dulu & Sekarang" — foto lama berganti foto sekarang saat di-scroll.
   // Tukar `then` / `now` / `name` sesuai foto yang benar.
   thenNow: [
-    { name: "Azmi", then: `${base}foto/g7.jpg`, thenPos: "50% 30%", now: `${base}foto/azmi.jpg`, nowPos: "50% 46%" },
+    { name: "Azmi", then: `${base}foto/g7.jpg`, thenPos: "50% 30%", now: `${base}foto/azmi.jpg`, nowPos: "50% 40%" },
     { name: "Gina", then: `${base}foto/g5.jpg`, thenPos: "50% 35%", now: `${base}foto/gina.jpg`, nowPos: "50% 50%" },
   ],
   people: {
@@ -49,7 +49,7 @@ export const CONFIG = {
       name: "Muhammad Azmi",
       initial: "A",
       photo: `${base}foto/azmi.jpg`, // taruh fotonya di public/foto/azmi.jpg
-      pos: "50% 46%", // posisi crop supaya wajah tidak terpotong
+      pos: "50% 40%", // posisi crop supaya wajah tidak terpotong
       bio: "Pendiam tapi hangat, suka bercanda di waktu yang tepat. Yang selalu bikin hari-harinya Gina terasa lebih tenang.",
     },
     gina: {

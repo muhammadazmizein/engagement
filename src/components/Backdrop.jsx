@@ -22,8 +22,8 @@ export default function Backdrop() {
       vy: 0.25 + Math.random() * 0.55, vx: rand(-0.25, 0.25), rot: rand(0, 6), vr: rand(-0.015, 0.015),
       sw: rand(0, 6), col: COLS[(Math.random() * 4) | 0], a: 0.25 + Math.random() * 0.35,
     });
-    const parts = Array.from({ length: innerWidth < 600 ? 12 : 24 }, () => mk(true));
-    const stars = Array.from({ length: 60 }, () => ({ x: rand(0, 1), y: rand(0, 1), r: rand(0.5, 1.4), p: rand(0, 6), s: rand(0.008, 0.03) }));
+    const parts = Array.from({ length: innerWidth < 600 ? 9 : 24 }, () => mk(true));
+    const stars = Array.from({ length: innerWidth < 600 ? 22 : 60 }, () => ({ x: rand(0, 1), y: rand(0, 1), r: rand(0.5, 1.4), p: rand(0, 6), s: rand(0.008, 0.03) }));
     const bursts = [];
 
     const burst = (px, py, n, sp = 7) => {
@@ -45,7 +45,12 @@ export default function Backdrop() {
       x.fill(); x.restore();
     };
 
+    // di layar sentuh gambar tiap 2 frame (~30fps): gerakan pelan, beban separuhnya
+    const half = matchMedia("(pointer: coarse)").matches;
+    let skip = false;
     const loop = () => {
+      raf = requestAnimationFrame(loop);
+      if (half && (skip = !skip)) return;
       x.clearRect(0, 0, W, H);
       stars.forEach((s) => {
         s.p += s.s; x.globalAlpha = 0.2 + 0.7 * Math.abs(Math.sin(s.p)); x.fillStyle = "#f5e0a8";
@@ -63,7 +68,6 @@ export default function Backdrop() {
         x.beginPath(); x.arc(b.x, b.y, b.r * b.life + 0.5, 0, 6.283); x.fill(); x.shadowBlur = 0;
       }
       x.globalAlpha = 1;
-      raf = requestAnimationFrame(loop);
     };
     loop();
 

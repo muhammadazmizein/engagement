@@ -26,6 +26,7 @@ export default function App() {
   // smooth scroll (inertia) — dilewati kalau pengguna memilih "kurangi animasi"
   useEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (matchMedia("(pointer: coarse)").matches) return; // HP/tablet: pakai scroll native yang sudah mulus
     const lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
     lenis.stop(); // dikunci sampai undangan dibuka
     setLenis(lenis);
